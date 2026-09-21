@@ -2,20 +2,20 @@ name: Pull Avianca Flight Lookup (Periscope) to Google Sheet
 
 on:
   schedule:
-    # Four times a day at 00:07, 06:07, 12:07, 18:07 America/Bogota.
+    # Four times a day at 00:03, 06:03, 12:03, 18:03 America/Bogota.
     # Bogota is UTC-5 all year (no DST), so the offset never drifts:
-    #   05:07 UTC = 00:07 Bogota
-    - cron: '7 5 * * *'
-    #   11:07 UTC = 06:07 Bogota
-    - cron: '7 11 * * *'
-    #   17:07 UTC = 12:07 Bogota
-    - cron: '7 17 * * *'
-    #   23:07 UTC = 18:07 Bogota
-    - cron: '7 23 * * *'
-    # :07 rather than :00/:01 - GitHub queues scheduled workflows behind
-    # everything scheduled at the top of the hour and runs started 2-4 h
-    # late on the sibling pipelines. Even a late run pulls the right days:
-    # the scraper computes its D-2..D0 window at run time.
+    #   05:03 UTC = 00:03 Bogota
+    - cron: '3 5 * * *'
+    #   11:03 UTC = 06:03 Bogota
+    - cron: '3 11 * * *'
+    #   17:03 UTC = 12:03 Bogota
+    - cron: '3 17 * * *'
+    #   23:03 UTC = 18:03 Bogota
+    - cron: '3 23 * * *'
+    # :03 rather than :07 (which every sibling pipeline in this account
+    # already uses) or :00/:01, in case shared-minute contention across
+    # pipelines is contributing to the delay. Even a late run still pulls
+    # the right days: the scraper computes its D-2..D0 window at run time.
   workflow_dispatch:
     inputs:
       backfill_start:
