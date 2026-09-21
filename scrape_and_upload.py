@@ -292,7 +292,7 @@ def scrape_window_csv(start_str, end_str):
             search.press_sequentially(MAINLINE_FILTER, delay=40)
             option = mainline_col.locator(".checkbox-list .checkbox", has=page.locator(".label", has_text=re.compile(rf"^\s*{re.escape(MAINLINE_FILTER)}\s*$"))).first
             option.wait_for(state="visible", timeout=30_000)
-            option.click(force=True)
+            option.locator(".icon").click(force=True)
             page.wait_for_timeout(500)
 
             # --- Date Range = Custom Range start..end ------------------
